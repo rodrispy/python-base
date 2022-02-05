@@ -57,3 +57,5 @@ while x < 4:
 print(f'Os meses com maiores vendas foram:')
 for i in range(0, len(top3)):
     print(f'{meses[vendas.index(top3[i])]} com {top3[i]}')
+
+teste
