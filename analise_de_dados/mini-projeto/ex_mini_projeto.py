@@ -33,9 +33,25 @@
 # encoding='latin1', encoding='ISO-8859-1', encoding='utf-8' ou então encoding='cp1252'
 
 
+### Programa principal
+# Importação de módulos e arquivos
 import pandas as pd
 
 funcionarios_df = pd.read_csv('CadastroFuncionarios.csv', sep=';', decimal=',')
-display(funcionarios_df)
+clientes_df = pd.read_csv('CadastroClientes.csv', sep=';', decimal=',')
+servicos_df = pd.read_excel('BaseServiçosPrestados.xlsx')
 
-#1 Calculando o valor total da folha salarial
+# Retirar colunas Estado Civil e Cargo da tabela de funcionários
+# Lista de colunas, axis=1 para indicar coluna
+funcionarios_df = funcionarios_df.drop(['Estado Civil', 'Cargo'], axis=1)
+
+display(funcionarios_df)
+display(clientes_df)
+display(servicos_df)
+
+#1 Folha Salarial
+funcionarios_df['Salario Total'] = funcionarios_df['Salario Base'] + funcionarios_df['Impostos'] + funcionarios_df['Beneficios'] + funcionarios_df['VT'] + funcionarios_df['VR']
+
+print(f'Total da Folha Salarial Mensal é de R$ {funcionarios_df["Salario Total"].sum():,}')
+
+#2 Faturamento da Empresa
