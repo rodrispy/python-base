@@ -49,9 +49,18 @@ display(funcionarios_df)
 display(clientes_df)
 display(servicos_df)
 
-#1 Folha Salarial
+##1 Folha Salarial
 funcionarios_df['Salario Total'] = funcionarios_df['Salario Base'] + funcionarios_df['Impostos'] + funcionarios_df['Beneficios'] + funcionarios_df['VT'] + funcionarios_df['VR']
 
 print(f'Total da Folha Salarial Mensal é de R$ {funcionarios_df["Salario Total"].sum():,}')
 
-#2 Faturamento da Empresa
+##2 Faturamento da Empresa
+# Criando um DF auxiliar com as colunas das outras tabelas que serão necessárias para o cálculo e dando um merge de acordo com o ID do cliente
+faturamentos_df = servicos_df[['ID Cliente', 'Tempo Total de Contrato (Meses)']].merge(clientes_df[['ID Cliente', 'Valor Contrato Mensal']], on='ID Cliente')
+
+# Criando a coluna de faturamento para cada cliente e somando tudo ao final
+faturamentos_df['Faturamento Total'] = faturamentos_df['Tempo Total de Contrato (Meses)'] * faturamentos_df['Valor Contrato Mensal']
+
+print(f'Faturamento Total: R${sum(faturamentos_df["Faturamento Total"]):,}')
+
+##3 % Funcionários Fecharam Contrato
