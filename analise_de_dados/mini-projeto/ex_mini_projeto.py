@@ -64,3 +64,22 @@ faturamentos_df['Faturamento Total'] = faturamentos_df['Tempo Total de Contrato 
 print(f'Faturamento Total: R${sum(faturamentos_df["Faturamento Total"]):,}')
 
 ##3 % Funcionários Fecharam Contrato
+# Utilizando o método .unique() para pegar apenas valores únicos da coluna
+qtde_funcionarios_contrato = len(servicos_df['ID Funcionário'].unique())
+qtde_funcionarios_total = len(funcionarios_df['ID Funcionário'])
+print(f'Percentual de funcionários que fecharam contrato: {qtde_funcionarios_contrato/qtde_funcionarios_total:.2%}')
+
+##4 Quantidade de Contratos por Área
+contratos_area_df = servicos_df[['ID Funcionário']].merge(funcionarios_df[['ID Funcionário', 'Area']], on='ID Funcionário')
+display(contratos_area_df)
+
+contratos_area_qtde = contratos_area_df['Area'].value_counts()
+print(contratos_area_qtde)
+
+##5 Funcionários por Área
+funcionarios_area = funcionarios_df['Area'].value_counts()
+funcionarios_area.plot(kind='bar')
+
+##6 Ticket Médio Mensal
+ticket_medio = clientes_df['Valor Contrato Mensal'].mean()
+print(f'Ticket Médio Mensal: R${ticket_medio:,.2f}')
