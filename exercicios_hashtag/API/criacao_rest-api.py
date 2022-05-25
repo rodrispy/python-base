@@ -2,11 +2,12 @@ import requests
 from flask import Flask
 
 app = Flask(__name__) #cria o site
+faturamento = 'teste'
 
 #a api sempre será construída com essas duas funcionalidades:
 @app.route("/") #decorator -> diz em qual link a função vai rodar
 def hello_world(): #function
-    return "<p>Hello, World!</p>"
+    return f"<p style='font-size: 80px'>Hello, World! {faturamento}</p>"
 
 @app.route("/teste")
 def teste():

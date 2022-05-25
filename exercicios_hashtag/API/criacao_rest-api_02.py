@@ -2,7 +2,7 @@ import requests
 from flask import Flask
 import pandas as pd
 
-app = Flask(__name__) #cria o site
+app = Flask(__name__)
 tabela = pd.read_excel("Vendas - Dez.xlsx")
 
 @app.route("/")
